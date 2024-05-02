@@ -18,4 +18,5 @@ public class AccountOperation {
     private OperationDate type;
     @ManyToOne
     BankAccount bankAccount;
+    private String description;
 }
