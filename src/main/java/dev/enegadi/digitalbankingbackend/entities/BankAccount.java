@@ -1,5 +1,7 @@
 package dev.enegadi.digitalbankingbackend.entities;
 
+import dev.enegadi.digitalbankingbackend.entities.AccountOperation;
+import dev.enegadi.digitalbankingbackend.entities.Customer;
 import dev.enegadi.digitalbankingbackend.enums.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE", length = 4)
+@DiscriminatorColumn(name = "TYPE",length = 4)
 @Data @NoArgsConstructor @AllArgsConstructor
 public class BankAccount {
     @Id
@@ -21,6 +23,7 @@ public class BankAccount {
     private AccountStatus status;
     @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "bankAccount")
+
+    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY)
     private List<AccountOperation> accountOperations;
 }
